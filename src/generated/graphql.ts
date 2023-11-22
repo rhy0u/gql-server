@@ -87,13 +87,13 @@ export type QueryUserArgs = {
 
 export type User = {
   __typename?: 'User';
-  email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   posts: Array<Post>;
+  userName: Scalars['String']['output'];
 };
 
 export type UserCreateInput = {
-  email: Scalars['String']['input'];
+  userName: Scalars['String']['input'];
 };
 
 
@@ -227,9 +227,9 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   posts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
+  userName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

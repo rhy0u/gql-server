@@ -1,54 +1,75 @@
 import { PrismaClient } from "@prisma/client"
+import { littleLorem, lorem } from "./seedData"
+
 const prisma = new PrismaClient()
 async function main() {
   const alice = await prisma.user.upsert({
-    where: { email: "alice@prisma.io" },
+    where: { userName: "alice" },
     update: {},
     create: {
-      email: "alice@prisma.io",
+      userName: "alice",
       posts: {
         create: {
           title: "Check out Prisma with Next.js",
-          content: "https://www.prisma.io/nextjs",
+          content: lorem,
           comments: {
-            create: [{ content: "true" }],
+            create: [{ content: littleLorem }],
           },
         },
       },
     },
   })
   const bob = await prisma.user.upsert({
-    where: { email: "bob@prisma.io" },
+    where: { userName: "bob" },
     update: {},
     create: {
-      email: "bob@prisma.io",
+      userName: "bob",
       posts: {
         create: [
           {
             title: "Follow Prisma on Twitter",
-            content: "https://twitter.com/prisma",
+            content: lorem,
             comments: {
-              create: [
-                { content: "nice article man !" },
-                { content: "bad article man !" },
-              ],
+              create: [{ content: littleLorem }, { content: littleLorem }],
             },
           },
           {
             title: "Follow Nexus on Twitter",
-            content: "https://twitter.com/nexusgql",
+            content: lorem,
             comments: {
-              create: [
-                { content: "I like ice cream" },
-                { content: "where am I" },
-              ],
+              create: [{ content: littleLorem }, { content: littleLorem }],
             },
           },
         ],
       },
     },
   })
-  console.log({ alice, bob })
+  const jack = await prisma.user.upsert({
+    where: { userName: "jack" },
+    update: {},
+    create: {
+      userName: "jack",
+      posts: {
+        create: [
+          {
+            title: "Follow Prisma on Twitter",
+            content: lorem,
+            comments: {
+              create: [{ content: littleLorem }, { content: littleLorem }],
+            },
+          },
+          {
+            title: "Follow Nexus on Twitter",
+            content: lorem,
+            comments: {
+              create: [{ content: littleLorem }, { content: littleLorem }],
+            },
+          },
+        ],
+      },
+    },
+  })
+  console.log({ alice, bob, jack })
 }
 main()
   .then(async () => {

@@ -9,11 +9,11 @@ import { Context } from "../context"
 export const typeDefs = `#graphql
     type User {
         id: ID!
-        email: String!
+        userName: String!
         posts: [Post!]!
     }
     input UserCreateInput {
-        email: String!
+        userName: String!
     }
     type Query {
       users: [User!]!

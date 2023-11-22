@@ -45,14 +45,9 @@ export const resolvers = {
       _parent: never,
       args: { post: PostCreateInput },
       context: Context,
-    ) => {
-      console.log("here")
-
-      const test = await context.prisma.post.create({
+    ) =>
+      context.prisma.post.create({
         data: { ...args.post, authorId: +args.post.authorId },
-      })
-      console.log(test)
-      return test
-    },
+      }),
   },
 }
